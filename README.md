@@ -1,4 +1,3 @@
-# INSA 2SU 2020
+# 2su-secu-syst
 
-https://bitbucket.org/whitewand/2su_2020/src
-
+Repository pour le rendu du cours de 2SU sur la sécurité des systèmes embarqués
