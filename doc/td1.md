@@ -42,7 +42,7 @@ La commande `string` nous permet de voir les chaine de caractères humainement c
 
 ![La fonction is_valid dans ObjDump](../src/crack-emily/images/is_valid_objdump.png)
 
-Dans ce petit morceaux d'assembleur on retrouve l'appelle à strcmp, puis la comparaison avec 0 via l'instruction `test %eax, %eax`. C'est ce test qui détermine le résultats de la fonction `is_valid`. Notre but est de faire en sorte que ce test ne servent à rien en modifiant la valeur de retour de la branche où celui ci échoue.
+Dans ce petit morceaux d'assembleur on retrouve l'appelle à strcmp, puis la comparaison avec 0 via l'instruction `test %eax, %eax`. C'est ce test qui détermine le résultats de la fonction `is_valid`. Notre but est de faire en sorte que la branche dans laquelle on tombe apres ce test n'impacte en rien le résultat de la fonction.
 
 On remarque dans la capture précédente que le return 0 ou return 1 est fait en deux étape. D'abord on met la valeur de retour dans le registre eax, puis on termine la fonction avec `retq`. Notre but va être d'écraser le 0 se trouvant à l'offset 0x11b4 pour le mettre à 1. Pour patcher le binaire on utilise la commande `dd`. On exécute alors la commande suivante:
 
@@ -53,3 +53,5 @@ python -c "print('\x01')" | dd of=out/emily count=1 bs=1 conv=notrunc seek=4532
 Voici le résultat après un patch réussi.
 
 ![Résultat après le binary patching](../src/crack-emily/images/correct_patch.png)
+
+**NOTE**: Le fuzzer écrit pour le TD4 m'a permis de voir que l'offset 4523 est aussi un bon offset (j'explique dans le TD4) !
