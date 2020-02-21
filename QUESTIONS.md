@@ -58,12 +58,14 @@ Cependant pour les tests un peu plus poussés (en condition réelles) et les bug
 
 > Lister les catégories de bug possibles et comment les exploiter et les défendre
 
-bufferoverflow, connexion port JTAG tout ça tout ça, fuzzer, analyseur de code (statique), reverse, etc...
+TODO: bufferoverflow, connexion port JTAG tout ça tout ça, fuzzer, analyseur de code (statique), reverse, etc...
 
 ## Idées d'amélioration de la sécurité dans l'embarqué
 
 > Quelles idées pour améliorer la sécurité en embarqué? (IA, Anti-debug, Obfuscation, Crypto ...) Choisissez une idée, chercher si elle existe et développer en quelques phrases quel avantage elle apporte et ses limites
 
-NOTE: pourquoi pas parler des systèmes d'analyse de code comme frama-c avec des AST sur lesquels on peut mettre des règles et tout et tout... voir meme quand c'est possible d'utiliser RUST ! xD
+Je suis plutot partisan de l'utilisation de système permettant de rendre les attaques compliqués pour l'attaquant, car les vulnérabilités sont toujours là. Pourtant, je voudrais mettre en avant que ces vulnérabilités sont assez souvent dû à l'erreur humaine et qu'il serait possible de parfois les éviter via l'utilisation d'outil de vérification automatique.
 
-Je suis plutot partisan de l'utilisation de système permettant de rendre les attaques compliqués pour l'attaquant, car les vulnérabilités sont toujours là. Pourtant, je voudrais mettre en avant que ces vulnérabilités sont assez souvent dû à l'erreur humaine.
+L'un des plus puissants des outils d'analyse statique du code est FramaC. Cette plateforme est composée de plusieurs greffons et un des principaux s'appuie sur de la vérification (statique) formelle. Ce logiciel open-source permet de définir des règles / propriétés qui doivent être vérifiés par le code. Un ensemble de règles basées sur des propriétés de sécurité peuvent être ainsi vérifié à chaque commit, notamment en couplant l'exécution de FramaC à une Pipeline gitlab par exemple.
+
+Pour appuyer mon propos l'ANSSI a énoncée [une offre de stage](https://www.ssi.gouv.fr/uploads/2019/10/s3043_developpement-d-un-greffon-frama-c-pour-la-genertion-automatique-d-annotation-acsl.pdf) partant de ce principe.
